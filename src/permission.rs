@@ -1,7 +1,6 @@
-use druid::{AppLauncher, Widget, WindowDesc, LocalizedString};
-use druid::widget::{Button, Flex, Padding, Label,};
-use std::process::{Command, Stdio, exit};
-
+use druid::widget::{Button, Flex, Label, Padding};
+use druid::{AppLauncher, LocalizedString, Widget, WindowDesc};
+use std::process::{exit, Command, Stdio};
 
 use crate::{melhorar_internet, reduzir_memoria};
 
@@ -19,7 +18,15 @@ pub fn is_admin() -> bool {
 
 pub fn run_as_admin() {
     Command::new("powershell")
-        .args(&["-ex", "unrestricted", "-c", &format!("Start-Process -FilePath '{}' -ArgumentList '-runas' -Verb RunAs", std::env::current_exe().unwrap().to_str().unwrap())])
+        .args(&[
+            "-ex",
+            "unrestricted",
+            "-c",
+            &format!(
+                "Start-Process -FilePath '{}' -ArgumentList '-runas' -Verb RunAs",
+                std::env::current_exe().unwrap().to_str().unwrap()
+            ),
+        ])
         .status()
         .expect("Falha ao executar como administrador");
 }

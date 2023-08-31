@@ -1,6 +1,6 @@
 use std::process::{Command, Stdio};
-use std::time::Duration;
 use std::thread::sleep;
+use std::time::Duration;
 
 pub(crate) fn otimizar_rede() {
     // Informações de cabeçalho
@@ -12,11 +12,16 @@ pub(crate) fn otimizar_rede() {
 
     // Aguardar a entrada do usuário
     let mut input = String::new();
-    std::io::stdin().read_line(&mut input).expect("Erro ao ler a entrada do teclado.");
+    std::io::stdin()
+        .read_line(&mut input)
+        .expect("Erro ao ler a entrada do teclado.");
 
     // Limpando o cache DNS
     println!("Limpando o cache DNS...");
-    Command::new("ipconfig").arg("/flushdns").output().expect("Falhou ao limpar cache DNS");
+    Command::new("ipconfig")
+        .arg("/flushdns")
+        .output()
+        .expect("Falhou ao limpar cache DNS");
     println!("Cache DNS limpo com sucesso.\n");
 
     // Desabilitando interfaces de rede
@@ -74,7 +79,9 @@ pub(crate) fn otimizar_rede() {
     println!("Otimização de DNS e rede concluída.");
     println!("Pressione Enter para sair...");
     input.clear();
-    std::io::stdin().read_line(&mut input).expect("Erro ao ler a entrada do teclado.");
+    std::io::stdin()
+        .read_line(&mut input)
+        .expect("Erro ao ler a entrada do teclado.");
 
     /*Command::new("taskill")
     .arg("/F")
@@ -82,5 +89,4 @@ pub(crate) fn otimizar_rede() {
     .arg("cmd.exe")
     .output()
     .expect("Falhou ao fechar a janela");*/
-
 }
