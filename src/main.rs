@@ -1,3 +1,5 @@
+
+
 mod Internet;
 mod Regs;
 mod Visual;
@@ -16,6 +18,8 @@ use Visual::interface::ui_builder;
 use crate::permission::{is_admin, run_as_admin};
 
 const BAT_FILES: include_dir::Dir = include_dir!("resources/bat_files");
+
+
 
 fn main() {
     env_logger::init();
@@ -47,15 +51,16 @@ fn main() {
         println!("Este programa requer permissões de administrador.");
         println!("\n\n");
         println!("Executando como administrador...");
-        std::thread::sleep(std::time::Duration::from_secs(3));
+        std::thread::sleep(std::time::Duration::from_secs(1));
         run_as_admin();
         exit(0);
     }
 
     let main_window = WindowDesc::new(ui_builder())
-        .title("Boost Fps by TiagoDev")
-        .window_size((650.0, 650.0));
+        .title("Boost Fps by TiagoDev");
+
     AppLauncher::with_window(main_window)
+        .log_to_console()
         .launch(())
         .expect("Falha ao iniciar a aplicação");
 }
